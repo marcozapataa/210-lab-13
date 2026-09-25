@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
@@ -25,6 +26,8 @@ int main() {
     if (!readData(inputFilename, students, studentCount)) {
         return 1;
     }
+    
+    cout << "Read " << studentCount << " student records" << endl;
 
 
     return 0;
@@ -37,6 +40,12 @@ bool readData(const string& filename, Student students[], int& count) {
     if (!inFile) {
         cout << "Error: Could not open input file " << filename << endl;
         return false;
+    }
+    
+    count = 0;
+    // loop through the data file until the end or array if filled
+    while (count < MAX_STUDENTS && inFile >> students[count].id >> students[count].score){
+        count++;
     }
     inFile.close();
     return true;
