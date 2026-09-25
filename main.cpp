@@ -14,6 +14,7 @@ struct Student {
 
 // function prototypes
 bool readData(const string& filename, Student students[], int& count);
+void selectionSortID(Student students[], int count);
 
 
 int main() {
@@ -28,6 +29,9 @@ int main() {
     }
     
     cout << "Read " << studentCount << " student records" << endl;
+
+    // selection sort on student ids
+    selectionSortID(students, studentCount);
 
 
     return 0;
@@ -50,4 +54,12 @@ bool readData(const string& filename, Student students[], int& count) {
     inFile.close();
     return true;
 
+}
+
+// function definition for selectionSortID
+void selectionSortID(Student students[], int count) {
+    // selection sort looks for smallest ID each time
+    for (int i = 0; i < count; i++) {
+        int minIndex = i;
+    }
 }
