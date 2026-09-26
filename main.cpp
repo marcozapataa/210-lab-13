@@ -134,4 +134,35 @@ void calculateStats(const Student students[], int count) {
     double mean = sum /count;
     cout << "\n--- Summary Statistics ---" << endl;
     cout << "Mean Score: " << mean << endl;
+
+    // calculate variance for the standard deviation formula
+    double varianceSum = 0;
+    for (int i = 0; i < count; i++) {
+        varianceSum += pow(students[i].score - mean, 2);
+    }
+    double stdDeviation = sqrt(varianceSum / count);
+
+    //make copy of array to sort by score to find median
+    Student copyStudents[MAX_STUDENTS];
+    for (int i = 0; i < count; i++) {
+        copyStudents[i] = students[i];
+    }
+
+    // selection sort on the copy array
+    for (int i = 0; i < count - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < count; j++) {
+            if (copyStudents[j].score < copyStudents[minIndex].score) {
+                minIndex = j;
+            }
+        }
+        Student temp = copyStudents[i];
+        copyStudents[i] = copyStudents[minIndex];
+        copyStudents[minIndex] = temp;
+    }
+
+    // pull the middle student element for the median value
+    int medianIdx = count / 2;
+    double medianScore = copyStudents[medianIdx].score;
+    string medianID = copyStudents[medianIdx].id;
 }
