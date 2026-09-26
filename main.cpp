@@ -44,6 +44,9 @@ int main() {
     }
     cout << "Sorted results written to " << outputFilename << endl;
 
+    // run calculations and print
+    calculateStats(students, studentCount);
+
 
     return 0;
 }
@@ -126,14 +129,12 @@ void calculateStats(const Student students[], int count) {
         if (students[i].score < students[minIdx].score) {
             minIdx = i;
         }
-        if (students[i].score > students{maxIdx}.score) {
+        if (students[i].score > students[maxIdx].score) {
             maxIdx = i;
         }
     }
-
     double mean = sum /count;
-    cout << "\n--- Summary Statistics ---" << endl;
-    cout << "Mean Score: " << mean << endl;
+    
 
     // calculate variance for the standard deviation formula
     double varianceSum = 0;
@@ -165,4 +166,16 @@ void calculateStats(const Student students[], int count) {
     int medianIdx = count / 2;
     double medianScore = copyStudents[medianIdx].score;
     string medianID = copyStudents[medianIdx].id;
+
+    //display stats
+    cout << "\n--- Summary Statistics ---" << endl;
+    cout << fixed << setprecision(4);
+    cout << "Minimum Score: " << setprecision(1) << students[minIdx].score << " (Student ID: "
+         << students[minIdx].id << ")" << endl;
+    cout << "Maximum Score: " << setprecision(1) << students[maxIdx].score << " (Student ID: " 
+         << students[maxIdx].id << ")" << endl;
+    cout << "Mean Score: " << setprecision(4) << mean << endl;
+    cout << "Median Score: " << setprecision(1) << medianScore << " (Student ID: "
+         << medianID << ")" << endl;
+    cout << "Standard Deviation: " << setprecision(5) << stdDeviation << endl;
 }
