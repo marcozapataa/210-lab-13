@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <iomanip>
+#include <cmath>
 
 using namespace std;
 
@@ -16,6 +18,7 @@ struct Student {
 bool readData(const string& filename, Student students[], int& count);
 void selectionSortID(Student students[], int count);
 bool writeData(const string& filename, const Student students[], int count);
+void calculateStats(const Student students[], int count);
 
 
 int main() {
@@ -104,4 +107,31 @@ bool writeData(const string& filename, const Student students[], int count) {
     }
     outFile.close();
     return true;
+}
+
+//function definition for calculateStats
+void calculateStats(const Student students[], int count) {
+    if (count == 0) {
+        cout << "\nNo records are available to compute." << endl;
+        return;
+    }
+
+    int minIdx = 0;
+    int maxIdx = 0;
+    double sum = 0;
+
+    // loop to get sum, min, max values
+    for (int i = 0; i < count; i++) {
+        sum += students[i].score;
+        if (students[i].score < students[minIdx].score) {
+            minIdx = i;
+        }
+        if (students[i].score > students{maxIdx}.score) {
+            maxIdx = i;
+        }
+    }
+
+    double mean = sum /count;
+    cout << "\n--- Summary Statistics ---" << endl;
+    cout << "Mean Score: " << mean << endl;
 }
